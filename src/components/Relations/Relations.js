@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, List, Select } from "antd";
+import { Button, Input, List, Rate, Select } from "antd";
 import { getRoot, isValidReference } from "mobx-state-tree";
 import { observer } from "mobx-react";
 import { ArrowLeftOutlined, ArrowRightOutlined, DeleteOutlined, MoreOutlined, SwapOutlined } from "@ant-design/icons";
@@ -14,10 +14,12 @@ import { Block, Elem } from "../../utils/bem";
 import "./Relations.styl";
 
 const { Option } = Select;
+const { TextArea } = Input;
 
 const RelationMeta = observer(({ rl }) => {
   const r = rl.relations;
   const selected = r.getSelected().map(v => v.value);
+
 
   return (
     <div style={{ marginTop: "10px" }}>
@@ -40,6 +42,12 @@ const RelationMeta = observer(({ rl }) => {
           </Option>
         ))}
       </Select>
+      {/*<h4 className={styles.header}>RATING</h4>*/}
+      {/*<Rate style={{ display: "flex" }} value={rl.rating} onChange={(val)=> {rl.setRelationRating(val);}}/>*/}
+      {/*/!*TODO: FILL in the option to rate the relation with a number/stars*!/*/}
+      {/*<h4 className={styles.header}>COMMENTS</h4>*/}
+      {/*<TextArea rows={1} value={rl.relationComment} onChange={(text)=>{rl.setRelationComment(text.target.value);}}/>*/}
+      {/*/!*TODO: FILL in the option to comment on the individual relation *!/*/}
     </div>
   );
 });

@@ -55,6 +55,7 @@ export class LabelStudio {
   }
 
   async createApp() {
+    console.log("Custom Frontend of Label Studio Initiated");
     const { store, getRoot } = await configureStore(this.options, this.events);
     const rootElement = getRoot(this.root);
 

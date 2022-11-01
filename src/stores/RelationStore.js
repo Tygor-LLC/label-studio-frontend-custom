@@ -15,7 +15,7 @@ const Relation = types
     node1: types.reference(Area),
     node2: types.reference(Area),
 
-    direction: types.optional(types.enumeration(["left", "right", "bi"]), "right"),
+    direction: types.optional(types.enumeration(["left", "right", "bi"]), "bi"),
 
     // labels
     relations: types.maybeNull(RelationsModel),
@@ -23,6 +23,10 @@ const Relation = types
     showMeta: types.optional(types.boolean, false),
 
     visible: true,
+
+    //rating: types.optional(types.maybeNull(types.number), null),
+
+    //relationComment: types.optional(types.maybeNull(types.string), null),
   })
   .views(self => ({
     get parent() {
@@ -88,6 +92,14 @@ const Relation = types
 
     toggleVisibility() {
       self.visible = !self.visible;
+    },
+
+    setRelationRating(value){
+      self.rating = value;
+    },
+
+    setRelationComment(comment){
+      self.relationComment = comment;
     },
   }));
 
@@ -160,6 +172,8 @@ const RelationStore = types
           to_id: r.node2.cleanId,
           type: "relation",
           direction: r.direction,
+          //rating: r.rating,
+          //comment: r.comment,
         };
 
         if (r.relations) s["labels"] = r.relations.selectedValues();
