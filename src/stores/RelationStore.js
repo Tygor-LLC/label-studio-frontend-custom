@@ -24,9 +24,9 @@ const Relation = types
 
     visible: true,
 
-    //rating: types.optional(types.maybeNull(types.number), null),
+    rating: types.optional(types.maybeNull(types.number), null),
 
-    //relationComment: types.optional(types.maybeNull(types.string), null),
+    comment: types.optional(types.maybeNull(types.string), null),
   })
   .views(self => ({
     get parent() {
@@ -99,7 +99,7 @@ const Relation = types
     },
 
     setRelationComment(comment){
-      self.relationComment = comment;
+      self.comment = comment;
     },
   }));
 
@@ -172,8 +172,8 @@ const RelationStore = types
           to_id: r.node2.cleanId,
           type: "relation",
           direction: r.direction,
-          //rating: r.rating,
-          //comment: r.comment,
+          rating: r.rating,
+          comment: r.comment,
         };
 
         if (r.relations) s["labels"] = r.relations.selectedValues();
@@ -182,12 +182,14 @@ const RelationStore = types
       });
     },
 
-    deserializeRelation(node1, node2, direction, labels) {
+    deserializeRelation(node1, node2, direction, labels, rating, comment) {
       const rl = self.addRelation(node1, node2);
 
       if (!rl) return; // duplicated relation
 
       rl.direction = direction;
+      rl.rating = rating;
+      rl.comment = comment;
 
       if (rl.relations && labels)
         labels.forEach(l => {

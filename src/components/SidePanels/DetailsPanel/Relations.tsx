@@ -1,13 +1,16 @@
 import { observer } from "mobx-react";
-import { FC, useCallback, useMemo, useState } from "react";
+import React, { FC, useCallback, useMemo, useState } from "react";
 import { IconInfo, IconLink, IconMenu, IconRelationBi, IconRelationLeft, IconRelationRight, IconTrash } from "../../../assets/icons";
 import { IconExpand, IconEyeClosed, IconEyeOpened } from "../../../assets/icons/timeline";
 import { Button } from "../../../common/Button/Button";
 import { Block, Elem } from "../../../utils/bem";
 import { wrapArray } from "../../../utils/utilities";
 import { RegionItem } from "./RegionItem";
-import { Select } from "antd";
+import { Input, Rate, Select } from "antd";
+
 import "./Relations.styl";
+
+const { TextArea } = Input;
 
 const RealtionsComponent: FC<any> = ({ relationStore }) => {
   return (
@@ -144,7 +147,7 @@ const RelationMeta: FC<any> = ({ relation }) => {
   }, []);
 
   return (
-    <Block name="relation-meta">
+    <Block name="relation-meta" style={{ flexDirection: "column" }}>
       <Select
         mode={selectionMode}
         style={{ width: "100%" }}
@@ -158,6 +161,13 @@ const RelationMeta: FC<any> = ({ relation }) => {
           </Select.Option>
         ))}
       </Select>
+      <h4>RATING</h4>
+      <Rate style={{ display: "flex" }} value={relation.rating} onChange={(val)=> {relation.setRelationRating(val);}}/>
+      <h4>COMMENTS</h4>
+      <TextArea rows={1} defaultValue={relation.comment} onChange={text => relation.setRelationComment(text.target.value)}>
+        {relation.comment}
+      </TextArea>
+      {/*TODO: Make Text area update appropriately, make sure data is saving to backend correctly*/}
     </Block>
   );
 };

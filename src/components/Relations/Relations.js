@@ -42,12 +42,14 @@ const RelationMeta = observer(({ rl }) => {
           </Option>
         ))}
       </Select>
-      {/*<h4 className={styles.header}>RATING</h4>*/}
-      {/*<Rate style={{ display: "flex" }} value={rl.rating} onChange={(val)=> {rl.setRelationRating(val);}}/>*/}
-      {/*/!*TODO: FILL in the option to rate the relation with a number/stars*!/*/}
-      {/*<h4 className={styles.header}>COMMENTS</h4>*/}
-      {/*<TextArea rows={1} value={rl.relationComment} onChange={(text)=>{rl.setRelationComment(text.target.value);}}/>*/}
-      {/*/!*TODO: FILL in the option to comment on the individual relation *!/*/}
+      <h4 className={styles.header}>RATING</h4>
+      <Rate style={{ display: "flex" }} value={rl.rating} onChange={(val)=> {rl.setRelationRating(val);}}/>
+      {/*TODO: FILL in the option to rate the relation with a number/stars*/}
+      <h4 className={styles.header}>COMMENTS</h4>
+      <TextArea rows={1} defaultValue={rl.comment} onChange={(text)=>{rl.setRelationComment(text.target.value);}}>
+        {rl.comment}
+      </TextArea>
+      {/*TODO: FILL in the option to comment on the individual relation */}
     </div>
   );
 });

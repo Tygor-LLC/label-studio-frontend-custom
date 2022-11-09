@@ -953,6 +953,8 @@ export const Annotation = types
               `${obj.to_id}#${self.id}`,
               obj.direction,
               obj.labels,
+              obj.rating,
+              obj.comment,
             );
           }
         });
