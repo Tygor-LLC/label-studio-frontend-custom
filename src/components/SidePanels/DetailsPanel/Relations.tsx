@@ -161,13 +161,26 @@ const RelationMeta: FC<any> = ({ relation }) => {
           </Select.Option>
         ))}
       </Select>
-      <h4>RATING</h4>
-      <Rate style={{ display: "flex" }} value={relation.rating} onChange={(val)=> {relation.setRelationRating(val);}}/>
-      <h4>COMMENTS</h4>
-      <TextArea rows={1} defaultValue={relation.comment} onChange={text => relation.setRelationComment(text.target.value)}>
-        {relation.comment}
-      </TextArea>
-      {/*TODO: Make Text area update appropriately, make sure data is saving to backend correctly*/}
+      {
+        relations.rating === "show" &&
+          (
+            <>
+              <h4>RATING</h4>
+              <Rate style={{ display: "flex" }} value={relation.rating} onChange={(val)=> {relation.setRelationRating(val);}}/>
+            </>
+          )
+      }
+      {
+        relations.comment === "show" &&
+          (
+            <>
+              <h4>COMMENTS</h4>
+              <TextArea rows={1} defaultValue={relation.comment} onChange={text => relation.setRelationComment(text.target.value)}>
+                {relation.comment}
+              </TextArea>
+            </>
+          )
+      }
     </Block>
   );
 };

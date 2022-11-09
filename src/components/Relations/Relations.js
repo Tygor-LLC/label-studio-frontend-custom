@@ -20,7 +20,6 @@ const RelationMeta = observer(({ rl }) => {
   const r = rl.relations;
   const selected = r.getSelected().map(v => v.value);
 
-
   return (
     <div style={{ marginTop: "10px" }}>
       <h4 className={styles.header}>LABELS</h4>
@@ -42,14 +41,26 @@ const RelationMeta = observer(({ rl }) => {
           </Option>
         ))}
       </Select>
-      <h4 className={styles.header}>RATING</h4>
-      <Rate style={{ display: "flex" }} value={rl.rating} onChange={(val)=> {rl.setRelationRating(val);}}/>
-      {/*TODO: FILL in the option to rate the relation with a number/stars*/}
-      <h4 className={styles.header}>COMMENTS</h4>
-      <TextArea rows={1} defaultValue={rl.comment} onChange={(text)=>{rl.setRelationComment(text.target.value);}}>
-        {rl.comment}
-      </TextArea>
-      {/*TODO: FILL in the option to comment on the individual relation */}
+      {
+        r.rating === "show" &&
+          (
+            <>
+              <h4>RATING</h4>
+              <Rate style={{ display: "flex" }} value={rl.rating} onChange={(val)=> {rl.setRelationRating(val);}}/>
+            </>
+          )
+      }
+      {
+        r.comment === "show" &&
+          (
+            <>
+              <h4>COMMENTS</h4>
+              <TextArea rows={1} defaultValue={rl.comment} onChange={text => rl.setRelationComment(text.target.value)}>
+                {rl.comment}
+              </TextArea>
+            </>
+          )
+      }
     </div>
   );
 });

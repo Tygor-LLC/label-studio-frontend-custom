@@ -27,9 +27,13 @@ import ControlBase from "./Base";
  * @meta_title Relations Tag for Multiple Relations
  * @meta_description Customize Label Studio by adding labels to relationships between labeled regions for machine learning and data science projects.
  * @param {single|multiple=} [choice=single] Configure whether you can select one or multiple labels
+ * @param {boolean} [allowRating=false] Should ratings be allowed on the underlying relation?
+ * @param {boolean} [allowComment=false] Should comments be allowed on the underlying relation?
  */
 const TagAttrs = types.model({
   choice: types.optional(types.enumeration(["single", "multiple"]), "multiple"),
+  rating: types.optional(types.enumeration(["show", "hide"]), "hide"),
+  comment: types.optional(types.enumeration(["show", "hide"]), "hide"),
 });
 
 /**
